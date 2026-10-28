@@ -1,6 +1,6 @@
-modules = ["nodejs-20", "bash", "java-graalvm22.3"]
+modules = ["bash", "java-graalvm22.3", "nodejs-22"]
 
-run = "npm --prefix admin-panel start"
+run = "PORT=5000 npm --prefix admin-panel start"
 
 onBoot = "npm --prefix admin-panel install"
 
@@ -19,3 +19,31 @@ channel = "stable-25_05"
 [userenv.shared]
 SUPABASE_ANON_KEY = "sb_publishable_N1FxtzqtD-1lG-kUnv3epw_AAxiYlL1"
 SUPABASE_URL = "https://slyqunbridskbetksbov.supabase.co"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "PORT=5000 npm --prefix admin-panel start"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
