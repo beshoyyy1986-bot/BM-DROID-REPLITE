@@ -1,4 +1,4 @@
-modules = ["nodejs-20", "go"]
+modules = ["nodejs-20", "bash", "java-graalvm22.3"]
 
 run = "npm --prefix admin-panel start"
 
@@ -10,3 +10,6 @@ onBoot = "npm --prefix admin-panel install"
 deploymentTarget = "vm"
 build = ["sh", "-c", "npm --prefix admin-panel install"]
 run = ["sh", "-c", "npm --prefix admin-panel start"]
+
+[nix]
+channel = "stable-25_05"
