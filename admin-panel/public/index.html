@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BM-DROID — لوحة الأدمن</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- تسجيل الدخول -->
+<div id="loginView" class="center-box hidden">
+  <div class="card">
+    <h1>🤖 BM-DROID</h1>
+    <p class="muted">لوحة تحكم تصدير التطبيقات</p>
+    <input id="loginUser" type="text" placeholder="اسم المستخدم" autocomplete="username">
+    <input id="loginPass" type="password" placeholder="كلمة المرور" autocomplete="current-password">
+    <button id="loginBtn" class="primary">دخول</button>
+    <p id="loginErr" class="error"></p>
+  </div>
+</div>
+
+<!-- لوحة التحكم -->
+<div id="dashView" class="hidden">
+  <header>
+    <h1>🤖 BM-DROID</h1>
+    <nav>
+      <button class="tab active" data-tab="export">📦 تصدير جديد</button>
+      <button class="tab" data-tab="licenses">🔑 التراخيص</button>
+      <button id="logoutBtn" class="danger-outline">خروج</button>
+    </nav>
+  </header>
+
+  <!-- تصدير -->
+  <section id="tab-export" class="tabpane">
+    <div class="card wide">
+      <h2>تصدير تطبيق كـ EXE محمي</h2>
+      <div class="grid">
+        <label>ملف التطبيق (APK)
+          <input id="apkFile" type="file" accept=".apk">
+        </label>
+        <label>اسم التطبيق (يظهر للمستخدم)
+          <input id="appName" type="text" placeholder="مثال: تطبيق المبيعات">
+        </label>
+        <label>اسم الحزمة (Package Name)
+          <input id="packageName" type="text" placeholder="com.example.myapp" dir="ltr">
+        </label>
+        <label>اسم العميل
+          <input id="customerName" type="text" placeholder="اختياري">
+        </label>
+        <label>مدة الاشتراك (بالأيام)
+          <input id="durationDays" type="number" value="30" min="1">
+        </label>
+      </div>
+      <button id="exportBtn" class="primary big">⚙️ تصدير EXE</button>
+      <div id="exportStatus" class="status"></div>
+      <div id="exportResult" class="result hidden"></div>
+    </div>
+  </section>
+
+  <!-- التراخيص -->
+  <section id="tab-licenses" class="tabpane hidden">
+    <div class="card wide">
+      <h2>التراخيص <button id="refreshLic" class="small">↻ تحديث</button></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>المفتاح</th><th>العميل</th><th>التطبيق</th><th>المدة</th>
+            <th>التفعيل</th><th>الانتهاء</th><th>الحالة</th><th>إجراءات</th>
+          </tr>
+        </thead>
+        <tbody id="licBody"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+tools/go/
+launcher/assets/app.apk
+launcher/assets/config.json
+android-image/work/
+android-image/out/
+runtime/bundle/
+runtime/out/
+*.exe
