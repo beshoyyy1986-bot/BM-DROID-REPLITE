@@ -16,6 +16,14 @@
 | `runtime/` | سكربت تجهيز حزمة QEMU portable (`runtime.zip`) |
 | `supabase/` | سكيمة التراخيص + دالة التفعيل الآمنة |
 
+## النشر على Replit
+
+1. اعمل **Import from GitHub** للريبو
+2. ضع القيم التالية في **Secrets** (إجباري — اللوحة لن تعمل بدونها):
+   `ADMIN_USER` `ADMIN_PASS` `SESSION_SECRET` `SUPABASE_URL` `SUPABASE_SERVICE_KEY` `SUPABASE_ANON_KEY` `RUNTIME_URL` `RUNTIME_SHA256`
+3. زر **Run** يثبّت الحزم ويشغّل اللوحة تلقائيًا (ملف `.replit` جاهز)
+4. عند النشر اختر **Reserved VM** وليس Autoscale (التصدير عملية طويلة وبيكتب ملفات)
+
 ## التجهيز (مرة واحدة)
 
 ### 1) Supabase
