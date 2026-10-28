@@ -1,0 +1,12 @@
+modules = ["nodejs-20", "go"]
+
+run = "npm --prefix admin-panel start"
+
+onBoot = "npm --prefix admin-panel install"
+
+# النشر: اختر Reserved VM من لوحة Deployments (مش Autoscale)
+# لأن التصدير عملية طويلة (go build) وبيكتب ملفات على القرص
+[deployment]
+deploymentTarget = "vm"
+build = ["sh", "-c", "npm --prefix admin-panel install"]
+run = ["sh", "-c", "npm --prefix admin-panel start"]
