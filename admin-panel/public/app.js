@@ -11,28 +11,40 @@ async function api(path, opts = {}) {
 }
 
 // ---------- دخول ----------
-async function tryShowDash() {
+async function tryShowDash(showError = false) {
   try {
     await api('/api/licenses');
     $('loginView').classList.add('hidden');
     $('dashView').classList.remove('hidden');
+    $('loginErr').textContent = '';
     loadLicenses();
-  } catch {
+    return true;
+  } catch (e) {
+    $('dashView').classList.add('hidden');
     $('loginView').classList.remove('hidden');
+    if (showError) {
+      $('loginErr').textContent = e.message === 'غير مسجل الدخول'
+        ? 'تم قبول البيانات لكن جلسة الدخول لم تستمر. أعد المحاولة.'
+        : `تم تسجيل الدخول، لكن تعذر تحميل البيانات: ${e.message}`;
+    }
+    return false;
   }
 }
 
 $('loginBtn').onclick = async () => {
   $('loginErr').textContent = '';
+  $('loginBtn').disabled = true;
   try {
     await api('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: $('loginUser').value, password: $('loginPass').value })
     });
-    tryShowDash();
+    await tryShowDash(true);
   } catch (e) {
     $('loginErr').textContent = e.message;
+  } finally {
+    $('loginBtn').disabled = false;
   }
 };
 $('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') $('loginBtn').click(); });
